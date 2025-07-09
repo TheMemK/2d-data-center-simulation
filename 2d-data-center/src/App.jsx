@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./index.css";
 
 function App() {
+  // This is a test github commit
   // ===== 1. BASIC DATA & SETTINGS (No dependencies) =====
 
   // Racks data - the foundation
