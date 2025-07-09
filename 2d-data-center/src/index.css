@@ -1,0 +1,274 @@
+.data-center-room {
+  /*background: #f0f2f5; */
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Main layout - side by side */
+.main-layout {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1400px;
+}
+
+/* AC Temperature Controls - Left Side */
+.ac-controls {
+  background: #fff;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 280px;
+  max-width: 320px;
+  position: sticky;
+  top: 20px;
+}
+
+.ac-controls h3 {
+  margin-bottom: 15px;
+  text-align: center;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.controls-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ac-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.ac-control label {
+  font-weight: bold;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.temp-display {
+  font-weight: bold;
+  color: #007bff;
+  font-size: 1.2em;
+  padding: 5px 10px;
+  background: #e3f2fd;
+  border-radius: 5px;
+  border: 1px solid #bbdefb;
+}
+
+.temp-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.temp-buttons button {
+  width: 35px;
+  height: 35px;
+  border: 2px solid #007bff;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: #007bff;
+  transition: all 0.2s;
+}
+
+.temp-buttons button:hover:not(:disabled) {
+  background: #007bff;
+  color: white;
+  transform: scale(1.05);
+}
+
+.temp-buttons button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Main content area - Right Side */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Room Container - The "huge box" */
+.room-container {
+  background: #e8e8e8;
+  border: 3px solid #333;
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  min-width: 700px;
+  min-height: 700px;
+  padding-bottom: 120px;
+}
+
+.rack-row {
+  display: flex;
+  gap: 32px;
+  margin-bottom: 40px;
+  justify-content: center;
+}
+
+.rack {
+  width: 100px;
+  height: 200px;
+  color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #555;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /*padding: 10px; */
+  font-size: 0.8em;
+  font-weight: bold;
+  position: relative;
+}
+
+/* Server Racks - Blue gradient */
+.rack-server {
+  background: linear-gradient(to bottom, #2c5aa0, #1a365d);
+}
+
+/* Network Racks - Green gradient */
+.rack-network {
+  background: linear-gradient(to bottom, #2d7d32, #1b5e20);
+}
+
+/* Storage Racks - Yellow gradient */
+.rack-storage {
+  background: linear-gradient(to bottom, #db9900, #c06d00);
+}
+
+.rack-name {
+  font-size: 0.9em;
+}
+
+/* Air Conditioning Units */
+.ac-row {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 15px 0;
+  width: 100%;
+}
+
+.ac-unit {
+  width: 120px;
+  height: 60px;
+  background: linear-gradient(to bottom, #a2e8ff, #d6f8ff);
+  color: #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #2c3e50;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  font-size: 0.8em;
+  font-weight: bold;
+  position: relative;
+  z-index: 1;
+}
+
+/* Walkway between racks */
+.walkway {
+  height: 40px;
+  background: linear-gradient(to right, #ddd, #ccc, #ddd);
+  border: 1px solid #999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+.walkway-label {
+  font-size: 0.8em;
+  color: #666;
+  font-weight: bold;
+}
+
+/* Legend styling */
+.legend {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.legend h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-size: 1.1em;
+}
+
+.legend-items {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-color {
+  width: 20px;
+  height: 20px;
+  border-radius: 3px;
+  border: 1px solid #555;
+}
+
+/* Small color squares for legend */
+.legend-color.rack-server {
+  background: linear-gradient(to bottom, #2c5aa0, #1a365d);
+}
+
+.legend-color.rack-network {
+  background: linear-gradient(to bottom, #2d7d32, #1b5e20);
+}
+
+.legend-color.rack-storage {
+  background: linear-gradient(to bottom, #ffd700, #ffb300);
+}
+
+.legend-color.ac-unit {
+  background: linear-gradient(to bottom, #a2e8ff, #d6f8ff);
+}
+
+.legend-item span {
+  font-size: 0.9em;
+  color: #555;
+  font-weight: 500;
+}
+
+/* Rack temperature display  */
+.rack-temp {
+  font-size: 0.7em;
+  color: #ffff00;
+  margin-top: 4px;
+  font-weight: normal;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 4px;
+  border-radius: 3px;
+}
