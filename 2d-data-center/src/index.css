@@ -1,5 +1,4 @@
 .data-center-room {
-  /*background: #f0f2f5; */
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -7,7 +6,6 @@
   padding: 20px;
 }
 
-/* Main layout - side by side */
 .main-layout {
   display: flex;
   gap: 30px;
@@ -16,7 +14,6 @@
   max-width: 1400px;
 }
 
-/* AC Temperature Controls - Left Side */
 .ac-controls {
   background: #fff;
   border: 2px solid #ddd;
@@ -99,7 +96,6 @@
   transform: none;
 }
 
-/* Main content area - Right Side */
 .main-content {
   flex: 1;
   display: flex;
@@ -107,7 +103,6 @@
   align-items: center;
 }
 
-/* Room Container - The "huge box" */
 .room-container {
   background: #e8e8e8;
   border: 3px solid #333;
@@ -138,23 +133,19 @@
   border: 1px solid #555;
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  /*padding: 10px; */
   font-size: 0.8em;
   font-weight: bold;
   position: relative;
 }
 
-/* Server Racks - Blue gradient */
 .rack-server {
   background: linear-gradient(to bottom, #2c5aa0, #1a365d);
 }
 
-/* Network Racks - Green gradient */
 .rack-network {
   background: linear-gradient(to bottom, #2d7d32, #1b5e20);
 }
 
-/* Storage Racks - Yellow gradient */
 .rack-storage {
   background: linear-gradient(to bottom, #db9900, #c06d00);
 }
@@ -163,7 +154,6 @@
   font-size: 0.9em;
 }
 
-/* Air Conditioning Units */
 .ac-row {
   display: flex;
   justify-content: center;
@@ -189,7 +179,6 @@
   z-index: 1;
 }
 
-/* Walkway between racks */
 .walkway {
   height: 40px;
   background: linear-gradient(to right, #ddd, #ccc, #ddd);
@@ -207,7 +196,6 @@
   font-weight: bold;
 }
 
-/* Legend styling */
 .legend {
   margin-bottom: 30px;
   text-align: center;
@@ -239,7 +227,6 @@
   border: 1px solid #555;
 }
 
-/* Small color squares for legend */
 .legend-color.rack-server {
   background: linear-gradient(to bottom, #2c5aa0, #1a365d);
 }
@@ -262,7 +249,6 @@
   font-weight: 500;
 }
 
-/* Rack temperature display  */
 .rack-temp {
   font-size: 0.7em;
   color: #ffff00;
@@ -271,4 +257,24 @@
   background: rgba(0, 0, 0, 0.3);
   padding: 2px 4px;
   border-radius: 3px;
+}
+
+/* Overheating rack styling - overrides normal rack colors */
+.rack.overheating {
+  background: linear-gradient(to bottom, #dc2626, #991b1b) !important;
+  border-color: #dc2626 !important;
+  animation: pulse-warning 2s infinite;
+}
+
+/* Warning pulse animation for overheating racks */
+@keyframes pulse-warning {
+  0% {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    box-shadow: 0 6px 12px rgba(220, 38, 38, 0.5);
+  }
+  100% {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
 }

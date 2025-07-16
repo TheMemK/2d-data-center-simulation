@@ -2,10 +2,6 @@ import { useState, useEffect } from "react";
 import "./index.css";
 
 function App() {
-  // This is a test github commit
-  // ===== 1. BASIC DATA & SETTINGS (No dependencies) =====
-
-  // Racks data - the foundation
   const rackData = [
     { id: 1, name: "Rack 1", type: "Storage" },
     { id: 2, name: "Rack 2", type: "Network" },
@@ -19,16 +15,12 @@ function App() {
     { id: 10, name: "Rack 10", type: "Storage" },
   ];
 
-  // Simulation settings - controls
   const simulationSettings = {
     updateInterval: 2000, // Update every 2 seconds
     tempVariation: 1, // Maximum temperature change per update
     isRunning: true, // Whether simulation is active
   };
 
-  // ===== 2. STATE DEFINITIONS =====
-
-  // AC units with controllable temperatures
   const [acTemperatures, setAcTemperatures] = useState([
     { id: 1, name: "AC-1", temp: 20 },
     { id: 2, name: "AC-2", temp: 22 },
@@ -36,19 +28,14 @@ function App() {
     { id: 4, name: "AC-4", temp: 20 },
   ]);
 
-  // Simulated rack temperatures
   const [simulatedRackTemps, setSimulatedRackTemps] = useState({});
 
-  // ===== 3. HELPER FUNCTIONS (Use state but don't change it) =====
-
-  // Warning Function
   const warningStatus = (rackType, temperature) => {
     if (rackType === "Server" && temperature > 30) return "WARNING";
     if (rackType === "Network" && temperature > 28) return "WARNING";
     if (rackType === "Storage" && temperature > 25) return "WARNING";
   };
 
-  // Calculate base rack temperature (uses AC state)
   const calculateRacktemp = (rackPosition, rackType) => {
     const rackHeat = {
       Server: 8,
@@ -70,16 +57,12 @@ function App() {
     return nearestACTemp + rackHeat[rackType];
   };
 
-  // ===== 4. STATE-CHANGING FUNCTIONS =====
-
-  // Function to update AC temperature
   const updateAcTemp = (acId, newTemp) => {
     setAcTemperatures((prev) =>
       prev.map((ac) => (ac.id === acId ? { ...ac, temp: newTemp } : ac))
     );
   };
 
-  // Temperature simulation function
   const simulateTemperatureChanges = () => {
     setSimulatedRackTemps((prevTemps) => {
       const newTemps = { ...prevTemps };
@@ -88,25 +71,20 @@ function App() {
         const baseTemp = calculateRacktemp(rack.id, rack.type);
         const currentSimulatedTemp = prevTemps[rack.id] || baseTemp;
 
-        // Generate random temperature change
         const randomChange =
           (Math.random() - 0.5) * 2 * simulationSettings.tempVariation;
         let newTemp = currentSimulatedTemp + randomChange;
 
-        // Keep temperature within reasonable bounds
         const minTemp = baseTemp - 3;
         const maxTemp = baseTemp + 5;
         newTemp = Math.max(minTemp, Math.min(maxTemp, newTemp));
 
-        // Round to 1 decimal place
-        newTemps[rack.id] = Math.round(newTemp * 10) / 10;
+        newTemps[rack.id] = Math.round(newTemp);
       });
 
       return newTemps;
     });
   };
-
-  // ===== 5. EFFECTS (Use everything above) =====
 
   // Initialize temperatures when AC changes
   useEffect(() => {
@@ -128,26 +106,19 @@ function App() {
     return () => clearInterval(interval);
   }, [acTemperatures, simulationSettings.isRunning]);
 
-  // ===== 6. COMPUTED VALUES (For rendering) =====
-
-  // Add temperatures to each rack for display
   const racks = rackData.map((rack) => ({
     ...rack,
     temperature:
       simulatedRackTemps[rack.id] || calculateRacktemp(rack.id, rack.type),
   }));
 
-  // ===== 7. RENDER UI =====
-
   return (
     <div className="data-center-room">
       <h1>2D Data Center Simulation</h1>
 
       <div className="main-layout">
-        {/* AC Temperature Controls - Left Side */}
         <div className="ac-controls">
           <h3>AC Temperature Controls:</h3>
-          {/* Simulation status indicator*/}
           <div className="simulation-status"></div>
           <div className="controls-grid">
             {acTemperatures.map((ac) => (
@@ -173,9 +144,7 @@ function App() {
           </div>
         </div>
 
-        {/* Main Content - Right Side */}
         <div className="main-content">
-          {/* Legend section */}
           <div className="legend">
             <h3>Equipment Types:</h3>
             <div className="legend-items">
@@ -198,9 +167,7 @@ function App() {
             </div>
           </div>
 
-          {/* Data Center Room Container */}
           <div className="room-container">
-            {/* Air Conditioning Units - Top */}
             <div className="ac-row">
               {acTemperatures.slice(0, 2).map((ac) => (
                 <div key={ac.id} className="ac-unit">
@@ -210,12 +177,15 @@ function App() {
               ))}
             </div>
 
-            {/* First row of racks */}
             <div className="rack-row">
               {racks.slice(0, 5).map((rack) => (
                 <div
                   key={rack.id}
-                  className={`rack rack-${rack.type.toLowerCase()}`}
+                  className={`rack rack-${rack.type.toLowerCase()}${
+                    warningStatus(rack.type, rack.temperature) === "WARNING"
+                      ? " overheating"
+                      : ""
+                  }`}
                 >
                   <div className="rack-name">{rack.name}</div>
                   <div className="rack-temp">{rack.temperature}°C</div>
@@ -227,17 +197,19 @@ function App() {
               ))}
             </div>
 
-            {/* Walkway between rack rows */}
             <div className="walkway">
               <span className="walkway-label">Main Walkway</span>
             </div>
 
-            {/* Second row of racks */}
             <div className="rack-row">
               {racks.slice(5, 10).map((rack) => (
                 <div
                   key={rack.id}
-                  className={`rack rack-${rack.type.toLowerCase()}`}
+                  className={`rack rack-${rack.type.toLowerCase()}${
+                    warningStatus(rack.type, rack.temperature) === "WARNING"
+                      ? " overheating"
+                      : ""
+                  }`}
                 >
                   <div className="rack-name">{rack.name}</div>
                   <div className="rack-temp">{rack.temperature}°C</div>
@@ -249,7 +221,6 @@ function App() {
               ))}
             </div>
 
-            {/* Air Conditioning Units - Bottom */}
             <div className="ac-row">
               {acTemperatures.slice(2, 4).map((ac) => (
                 <div key={ac.id} className="ac-unit">
